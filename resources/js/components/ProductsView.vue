@@ -10,7 +10,7 @@
     >
       Cart ({{ quantityItem }})
     </button>
-  
+
   </div>
 </template>
 
@@ -46,26 +46,24 @@ export default {
 
       // call action vuex
       this.$store.dispatch('addToCart', newItem);
-
-      // count item in cart
-      // this.countItemCart();
     },
     navigateToCart() {
       this.$router.push({ name: 'cart'});
     },
-    // countItemCart() {
-    //   this.quantityItem = 0;
-
-    //   for (const item of this.cart) {
-    //     this.quantityItem = this.quantityItem + item.quantity;
-    //   }
-
-    //   return this.quantityItem;
-    // },
     formatRupiah(value) {
       const price = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value);
       return price;
+    },
+    // ???
+    getData() {
+      if(!this.products) {
+        console.log('Haii boss')
+        this.$store.dispatch('getAllData');
+      }
     }
    },
+   mounted() {
+    this.getData();
+   }
 };
 </script>

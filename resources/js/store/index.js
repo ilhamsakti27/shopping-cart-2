@@ -1,9 +1,11 @@
 import { createStore } from 'vuex';
-import productsData from './../../productsData.json';
+// import productsData from './../../productsData.json';
+import axios from 'axios';
 
 export default createStore({
   state: {
-    products: productsData,
+    // products: productsData,
+    products: null,
     cart: [],
     quantityItem: 0,
     total: 0,
@@ -85,6 +87,10 @@ export default createStore({
       }
 
       state.showTotal = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(state.total);
+    },
+    UPDATE_DATA(state, payload) {
+      state.products = payload
+      console.log(payload);
     }
   },
   actions: {
@@ -96,5 +102,10 @@ export default createStore({
       context.commit('DELETE_ITEM', payload);
       context.commit('TOTAL_PRICE', payload);
     },
+    async getAllData(context) {
+      let response = await axios.get("api/getAllData");
+      context.commit("UPDATE_DATA", response.data);
+    }
+  
   },
 });

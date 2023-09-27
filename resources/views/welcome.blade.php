@@ -17,7 +17,7 @@
     </head>
     <body class="antialiased">
         <div id="app">
-            <h1>Haiii</h1>
+            <router-view></router-view>
         </div>
 
         <script src="{{mix('js/app.js')}}" type="text/javascript"></script>
